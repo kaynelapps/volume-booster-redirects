@@ -2,14 +2,32 @@
 <html>
 <head>
     <title>Payment Success</title>
-    <meta http-equiv="refresh" content="0;url=volumebooster://payment/success">
-    <script>
-        window.location.href = "volumebooster://payment/success";
-    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 400px; margin: 0 auto; }
+        .success { color: #28a745; }
+    </style>
 </head>
 <body>
-    <h2>Payment Successful! 🎉</h2>
-    <p>Redirecting to Volume Booster app...</p>
-    <p><a href="volumebooster://payment/success">Click here if not redirected automatically</a></p>
+    <div class="container">
+        <h2 class="success">Payment Successful! 🎉</h2>
+        <p>Redirecting to Volume Booster app in <span id="countdown">3</span> seconds...</p>
+        <p><a href="volumebooster://payment/success">Click here to open app manually</a></p>
+    </div>
+
+    <script>
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(function() {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = "volumebooster://payment/success";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
