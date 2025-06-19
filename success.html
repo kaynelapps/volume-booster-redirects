@@ -2,32 +2,77 @@
 <html>
 <head>
     <title>Payment Success</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .container { max-width: 400px; margin: 0 auto; }
-        .success { color: #28a745; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        .container { 
+            max-width: 400px; 
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { 
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 18px;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .manual-link:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 class="success">Payment Successful! 🎉</h2>
-        <p>Redirecting to Volume Booster app in <span id="countdown">3</span> seconds...</p>
-        <p><a href="volumebooster://payment/success">Click here to open app manually</a></p>
+        <p>Thank you for your purchase!</p>
+        <p>Redirecting to Volume Booster app in <span id="countdown" class="countdown">5</span> seconds...</p>
+        <a href="volumebooster://payment/success" class="manual-link">Open App Now</a>
     </div>
 
     <script>
-        let countdown = 3;
+        console.log('Page loaded successfully');
+        
+        let countdown = 5;
         const countdownElement = document.getElementById('countdown');
         
-        const timer = setInterval(function() {
-            countdown--;
-            countdownElement.textContent = countdown;
-            
-            if (countdown <= 0) {
-                clearInterval(timer);
-                window.location.href = "volumebooster://payment/success";
-            }
-        }, 1000);
+        if (countdownElement) {
+            const timer = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                console.log('Countdown:', countdown);
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    console.log('Redirecting to app...');
+                    window.location.href = "volumebooster://payment/success";
+                }
+            }, 1000);
+        } else {
+            console.error('Countdown element not found');
+        }
     </script>
 </body>
 </html>
