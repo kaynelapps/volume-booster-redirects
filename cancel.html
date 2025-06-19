@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Cancelled</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        .container { 
+            max-width: 400px; 
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .cancelled { 
+            color: #dc3545;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 18px;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .manual-link:hover {
+            background-color: #545b62;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="cancelled">Payment Cancelled</h2>
+        <p>No worries! You can try again anytime.</p>
+        <p>Redirecting to Volume Booster app in <span id="countdown" class="countdown">5</span> seconds...</p>
+        <a href="volumebooster://payment/cancel" class="manual-link">Return to App</a>
+    </div>
+
+    <script>
+        console.log('Cancel page loaded successfully');
+        
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        if (countdownElement) {
+            const timer = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                console.log('Countdown:', countdown);
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    console.log('Redirecting to app...');
+                    window.location.href = "volumebooster://payment/cancel";
+                }
+            }, 1000);
+        } else {
+            console.error('Countdown element not found');
+        }
+    </script>
+</body>
+</html>
